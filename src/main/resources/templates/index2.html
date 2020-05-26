@@ -3,13 +3,18 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Inicio</title>
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+  rel="stylesheet"
+/>
 </head>
 <body>
-
-	<h1>Hola </h1>
+ <div class="container mt-5">
+	<h1 class="mb-5">Parcial 2 </h1>
 	
 	<form method="post" th:action="@{/insertarCate}">
-     	<input type="submit" value="Ingresar Categoria">            	
+     	<input type="submit"  value="Ingresar Categoria">            	
     </form> <br>
     
     <form method="post" th:action="@{/insertarLibro}">
@@ -17,8 +22,12 @@
     </form> <br>
     
     <form method="post" th:action="@{/verLibros}">
-     	<input type="submit" value="Ver Libros">            	
+     	<input type="submit"  value="Ver Libros">            	
     </form> <br>
-
+    
+    <span class="mt-5" th:text="${save}"> </span>
+ </div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

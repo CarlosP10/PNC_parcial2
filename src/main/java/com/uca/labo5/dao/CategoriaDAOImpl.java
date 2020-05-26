@@ -11,7 +11,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.uca.labo5.domain.Categoria;
-import com.uca.labo5.domain.Contribuyente;
 
 @Repository
 public class CategoriaDAOImpl implements CategoriaDAO{

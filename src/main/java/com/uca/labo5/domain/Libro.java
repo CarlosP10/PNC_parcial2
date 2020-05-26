@@ -3,6 +3,8 @@ package com.uca.labo5.domain;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -53,10 +56,8 @@ public class Libro {
 	@Transient
 	private Integer cCategoriafk;
 	
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "f_ingreso")
-	@Temporal(TemporalType.DATE)
-	private Date ingreso;
+	private LocalDateTime ingreso;
 	
 	@Column(name = "b_estado")
 	private Boolean estado;
@@ -91,13 +92,10 @@ public class Libro {
 	public void setcCategoria(Categoria cCategoria) {
 		this.cCategoria = cCategoria;
 	}
-	public String getIngreso() throws ParseException{
-		DateFormat formatter = new SimpleDateFormat("dd/MM/YYYY hh:mm:ss");
-		Date date2 = new SimpleDateFormat("yyyy-mm-dd").parse(String.valueOf(ingreso));
-		String strDate = formatter.format(date2);
-		return strDate;
+	public LocalDateTime getIngreso(){
+		return ingreso;
 	}
-	public void setIngreso(Date ingreso) {
+	public void setIngreso(LocalDateTime ingreso) {
 		this.ingreso = ingreso;
 	}
 	public Boolean getEstado() {
@@ -113,6 +111,22 @@ public class Libro {
 			return estado == true ?"Activo":"Inactivo";
 		}
 	}
+	
+	public String getFechaDelegate(){
+		if(this.ingreso == null){
+			return "";
+		}
+		else{
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+			String shortdate = this.ingreso.format(formatter);
+			return shortdate;
+		}
+    }
+
+    @PrePersist
+    public void prePersist(){
+        this.ingreso = LocalDateTime.now();
+    }
 	
 	public Libro() {
 		

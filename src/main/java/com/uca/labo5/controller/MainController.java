@@ -19,24 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uca.labo5.dao.CategoriaDAO;
-import com.uca.labo5.dao.ContrubyenteDAO;
-import com.uca.labo5.dao.ImportanciaDAO;
 import com.uca.labo5.dao.LibroDAO;
 import com.uca.labo5.domain.Categoria;
-import com.uca.labo5.domain.Contribuyente;
-import com.uca.labo5.domain.Importancia;
 import com.uca.labo5.domain.Libro;
 
 
 @Controller
 public class MainController {
-//
-//	@Autowired
-//	private ImportanciaDAO impoDao;
-//	
-//	@Autowired
-//	private ContrubyenteDAO contriDao;
-//	
+
 	@Autowired
 	private LibroDAO libroDAO;
 	
@@ -46,12 +36,7 @@ public class MainController {
 	@RequestMapping("/index")
 	public ModelAndView index() {
 		ModelAndView mav = new ModelAndView();
-		Categoria categoria = new Categoria();
-		Libro libro = new Libro();
-		mav.addObject("categorias",categoria);
-		mav.addObject("libros",libro);
-//		mav.addObject("contribuyente",contri);
-//		mav.addObject("importancias",impor);
+		mav.addObject("save","");
 		mav.setViewName("index2");
 		return mav;
 	}
@@ -94,6 +79,7 @@ public class MainController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			mav.addObject("save","Categoria guardada con exito.");
 			mav.addObject("categorias", categorias);
 			mav.setViewName("index2");
 		}		
@@ -113,12 +99,9 @@ public class MainController {
 			mav.addObject("categorias",impor);
 			mav.setViewName("agregarLibro");
 		}
-		else {
-			SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
-			Date date = new Date(System.currentTimeMillis());
-			libro.setIngreso(date);
+		else {			
 			libroDAO.insertar(libro);
-			System.out.println(libro.getEstado());
+			mav.addObject("save","Libro guardado con exito.");
 			mav.setViewName("index2");
 		}		
 		return mav;
@@ -139,44 +122,4 @@ public class MainController {
 		mav.setViewName("verLibros");
 		return mav;
 	}
-
-//	@PostMapping("/procesar")
-//	public ModelAndView guardar(@Valid @ModelAttribute Contribuyente contri, BindingResult result){
-//		ModelAndView mav = new ModelAndView();			
-//		if(result.hasErrors()) { 
-//			List<Importancia> impor= null;
-//			try {
-//				impor = impoDao.findAll();
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//			mav.addObject("importancias",impor);
-//			mav.setViewName("index");
-//		}
-//		else {
-//			SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
-//			Date date = new Date(System.currentTimeMillis());
-//			contri.setDate(date);
-//			contriDao.insertar(contri);
-//			mav.setViewName("guardado");
-//		}		
-//		return mav;
-//	}
-//	
-//	@RequestMapping("/listado")
-//	public ModelAndView viewAll(){
-//		ModelAndView mav = new ModelAndView();
-//		
-//		List<Contribuyente> contri = null;
-//		try {
-//			contri = contriDao.findAll();
-//		}
-//		catch(Exception e){
-//			e.printStackTrace();
-//		}
-//		mav.addObject("contribuyentes",contri);
-//		mav.setViewName("main");
-//		return mav;
-//	}
-
 }
