@@ -19,6 +19,7 @@
 					<th>Autor</th>
 					<th>ISBN</th>
 					<th>Categoria</th>
+					<th>Estado</th>
 					<th>Fecha de ingreso</th>
 				</thead>
 				<th:block th:each="c :${libros}">
@@ -27,6 +28,7 @@
 						<th th:text="${c.autor}" />
 						<th th:text="${c.isbn}" />
 						<th th:text="${c.cCategoria.sCategoria}" />
+						<th th:text="${c.estadoDelegate}" />
 						<th th:text="${c.ingreso}" />
 					</tr>
 				</th:block>
