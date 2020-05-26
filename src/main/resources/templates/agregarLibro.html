@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Agregar Libro</title>
+</head>
+<body>
+	<h1>Tarea 5</h1>
+			
+            	
+	<p class="mb-0">Ingrese los datos:</p><br/>
+	<form method="post" th:action="@{/ingresarLibro}" th:object="${libros}">		
+		<label >Titulo</label>
+			<input th:field="*{titulo}" type="text" placeholder="Ingrese Titulo" />
+			<span th:errors="*{titulo}" style="color: #FF0000"></span>
+	<br>
+       <label >Autor</label>
+        	<input th:field="*{autor}"  type="text" placeholder="Ingrese Autor" />
+        	<span th:errors="*{autor}" style="color: #FF0000"></span>
+	<br>
+        <label >ISBN</label>
+        	<input  th:field="*{isbn}"  type="text" placeholder="Ingrese ISBN"  />
+        	<span th:errors="*{isbn}" style="color: #FF0000"></span>
+	<br> 
+		
+		<label>Categoria</label>
+		<select th:field="*{cCategoria.cCategoria}">		
+			<option th:each="i :${categorias}"
+	              th:value="${i.cCategoria}"
+	              th:text="${i.sCategoria}"></option>
+		</select>
+	<br>
+	
+		<!--<label>Activo: </label>
+		<input th:field="*{estado}" th:value="${true}" type="radio"/><br>
+		
+		<label>Inactivo: </label>
+		<input th:field="*{estado}" th:value="${false}" type="radio"/><br>-->
+		
+		 <label>Estado </label>
+		<input th:field="*{estado}" type="checkbox"/><br>
+		
+		 <!--th:field="*{estado}" -->
+				             	                  
+       <input type="submit" value="Guardar">
+       
+    </form>
+    
+    <form method="post" th:action="@{/listado}">
+     	<input type="submit" value="Ver Contribuyentes">            	
+    </form>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Lista de Libros</title>
+</head>
+<body>
+	<table>
+		<thead>
+			<th>Titulo</th>
+			<th>Autor</th>
+			<th>ISBN</th>			
+			<th>Categoría</th>
+			<th>Fecha de ingreso</th>
+		</thead>
+		<th:block th:each="c :${libros}">
+			<tr>
+				<th th:text="${c.titulo}"/>
+				<th th:text="${c.autor}"/>
+				<th th:text="${c.isbn}"/>
+				<th th:text="${c.cCategoria.sCategoria}"/>
+				<th th:text="${c.ingreso}"/>
+			</tr>					
+		</th:block>		
+	</table>
+	<br>
+	
+	<form method="post" th:action="@{/index}">
+     	<input type="submit" value="Regresar">            	
+    </form>
+
+</body>
+</html>

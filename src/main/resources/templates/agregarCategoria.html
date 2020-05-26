@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Agregar Categoria</title>
+</head>
+<body>
+	<h1>Tarea 5</h1>
+			
+            	
+	<p class="mb-0">Ingrese los datos:</p><br/>
+	<form method="post" th:action="@{/ingresarCat}" th:object="${categorias}">		
+		<label >Nombre Categoria</label>
+			<input th:field="*{sCategoria}" type="text" placeholder="Ingrese Nombre" />
+			<span th:errors="*{sCategoria}" style="color: #FF0000"></span><br>
+			             	                  
+       <input type="submit" value="Guardar categoria">
+       
+    </form>
+    
+    <form method="post" th:action="@{/index}">
+     	<input type="submit" value="Regresar">            	
+    </form>
+</body>
+</html>
